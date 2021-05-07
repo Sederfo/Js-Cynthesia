@@ -5,11 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="piano.css" />
     <script defer src="script.js"></script>
+
+    <script type="module" src="chordRecognition.js"></script>
     <title>Cynthesia WEB</title>
   </head>
 
   <body>
+    <div class="navbar">
+      <button id="settings-button">Settings</button>
+    </div>
+
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+      </div>
+    </div>
+
     <div class="piano">
       <div data-note="A0" class="key white"></div>
       <div data-note="Bb0" class="key black"></div>
