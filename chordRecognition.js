@@ -1,2 +1,14 @@
-import { Note } from "C:/Users/Vlad/Desktop/Js Cynthesia/node_modules/@tonaljs/tonal";
-console.log(Note("C"));
+const Tonal = require("@tonaljs/tonal");
+
+const keys = document.querySelectorAll(".key");
+
+var active_keys = [];
+keys.forEach((key) => {
+  if (key.classList.contains("active")) {
+    active_keys.push(key);
+  }
+});
+
+active_keys.forEach((key) => {
+  console.log(key.dataset.note);
+});

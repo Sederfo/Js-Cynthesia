@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="modal.css" />
     <link rel="stylesheet" href="piano.css" />
-    <script defer src="script.js"></script>
 
-    <script type="module" src="chordRecognition.js"></script>
+    <script defer src="bundle.js"></script>
     <title>Cynthesia WEB</title>
   </head>
 
   <body>
     <div class="navbar">
-      <button id="settings-button">Settings</button>
+      <button id="settings-button" class="settingsButton">Settings</button>
+
+      <div id="chordText" class="chordText"></div>
     </div>
 
     <div id="myModal" class="modal">

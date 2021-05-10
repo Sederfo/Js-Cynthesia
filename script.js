@@ -1,4 +1,8 @@
+const Tonal = require("@tonaljs/tonal");
+
 const notes = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
+
+console.log(Tonal.Chord.detect(["D", "Gb", "A", "C"]));
 
 const keys = document.querySelectorAll(".key");
 
@@ -28,6 +32,8 @@ function onMIDISuccess(midiAccess) {
     input.onmidimessage = getMIDIMessage;
 }
 
+var active_keys = [];
+
 function getMIDIMessage(message) {
   var command = message.data[0];
   var note = message.data[1];
@@ -42,6 +48,8 @@ function getMIDIMessage(message) {
     case 144: // noteOn
       if (velocity > 0) {
         console.log("note on ", note_name, velocity);
+        active_keys.push(note_name);
+        console.log("active keys ", active_keys.toString());
         //illuminate key
 
         //loop through keys array and use dataset.note to identify correct key in page
@@ -50,6 +58,12 @@ function getMIDIMessage(message) {
         });
       } else {
         console.log("note off ", note_name, velocity);
+
+        const index = active_keys.indexOf(note_name);
+        if (index > -1) {
+          active_keys.splice(index, 1);
+        }
+        console.log("active keys ", active_keys.toString());
         //loop through keys array and use dataset.note to identify correct key in page
         keys.forEach((key) => {
           if (key.dataset.note == note_name) key.classList.remove("active");
@@ -59,6 +73,16 @@ function getMIDIMessage(message) {
     case 128: // noteOff
       console.log("note off ", note, velocity);
       break;
+  }
+
+  active_keys.sort();
+  if (active_keys.length > 2) {
+    console.log(Tonal.Chord.detect(active_keys));
+    document.getElementById("chordText").innerHTML = Tonal.Chord.detect(
+      active_keys
+    )[0];
+  } else {
+    document.getElementById("chordText").innerHTML = "";
   }
 }
 
